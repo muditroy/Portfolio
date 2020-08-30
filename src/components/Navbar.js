@@ -1,6 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-function Navbar() {
+
+class Navbar extends Component {
+  constructor(props) {
+      super(props);
+    
+      this.state = {
+        isNavOpen: false
+      };
+    }
+
+    toggleNav() {
+      this.setState({
+        isNavOpen: !this.state.isNavOpen
+      });
+    }
+  render(){
+  const show=(this.state.isNavOpen) ? "show" : "";
   return (
     <div>
       <nav className="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
@@ -16,10 +32,11 @@ function Navbar() {
             type="button"
             data-toggle="collapse"
             data-target="#Navbar"
+            onClick={()=>this.toggleNav()}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="Navbar">
+          <div className={"collapse navbar-collapse " + show} id="Navbar">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <NavLink className="nav-link" to="/home">
@@ -47,5 +64,6 @@ function Navbar() {
       </nav>
     </div>
   );
+  }
 }
 export default Navbar;
